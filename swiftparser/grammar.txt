@@ -1,0 +1,7 @@
+AssignmentExpression    : Token name; ExpressionProtocol value
+BinaryExpression        : ExpressionProtocol left; Token operation; ExpressionProtocol right
+GroupingExpression      : ExpressionProtocol expression
+LiteralExpression       : Any value
+UnaryExpression         : Token operator; ExpressionProtocol right
+LogicalExpression       : ExpressionProtocol left; Token operator; ExpressionProtocol right
+VariableExpression      : Token name
