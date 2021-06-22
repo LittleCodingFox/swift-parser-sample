@@ -24,6 +24,8 @@ if CommandLine.arguments.count > 1 {
             break
         }
 
+        print(">")
+
         let scanner = Scanner(source: line)
 
         scanner.errorCallback = { line, message in
@@ -33,9 +35,22 @@ if CommandLine.arguments.count > 1 {
 
         scanner.scanTokens()
 
-        for token in scanner.tokens {
+        let parser = Parser(tokens: scanner.tokens)
 
-            print(token.type)
+        parser.errorCallback = { line, message in
+
+            print("Error at line \(line): \(message)")
+        }
+
+        let statements: [StatementProtocol]
+
+        do {
+
+            statements = try parser.parse()
+
+        } catch {
+
+            continue
         }
     }
 }

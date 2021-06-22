@@ -24,16 +24,38 @@ class Parser {
 
 extension Parser {
 
-    func parse() -> [StatementProtocol] {
+    func parse() throws -> [StatementProtocol] {
 
         var statements = [StatementProtocol]()
 
         while self.EOF == false {
 
-            //statements.append(self.declaration())
+            do {
+
+                statements.append(try self.declaration())
+
+            } catch {
+
+                throw error
+            }
         }
 
         return statements
+    }
+
+    func synchronize() {
+
+        _ = self.advance()
+
+        while self.EOF == false {
+
+            if self.previous.type == .semicolon {
+
+                return
+            }
+
+            _ = self.advance()
+        }
     }
 
     func consume(tokenType: TokenType, message: String) throws -> Token {

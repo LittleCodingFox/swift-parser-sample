@@ -1,1 +1,3 @@
-
+PrintStatement      : Token token; ExpressionProtocol expression
+ExpressionStatement : ExpressionProtocol expression
+VariableStatement   : Token name; ExpressionProtocol initializer
