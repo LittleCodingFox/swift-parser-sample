@@ -23,7 +23,7 @@ y = 1;
 x = (y + 1) * (y + 1);
 ```
 
-Each statement must end with a `;`
+Each statement must end with a `;`. It doesn't handle any string values, only numbers and variables. It does not support functions right now.
 
 # License
 
