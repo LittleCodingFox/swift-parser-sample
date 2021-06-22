@@ -1,3 +1,15 @@
+let interpreter = Interpreter()
+var hasError = false
+
+interpreter.runtimeError = { error in
+
+    guard case let .error(token: token, message: message) = error else { return }
+
+    print("Error in line \(token.line): \(message)")
+
+    hasError = true
+}
+
 if CommandLine.arguments.count > 1 {
 
     let mode = CommandLine.arguments[1]
@@ -15,31 +27,43 @@ if CommandLine.arguments.count > 1 {
             print("Usage: \(CommandLine.arguments[0]) --astgen grammar statements outdir")
         }
     }
+
 } else {
 
     while true {
+
+        print(">")
 
         guard let line = readLine() else {
 
             break
         }
 
-        print(">")
+        hasError = false
 
         let scanner = Scanner(source: line)
 
         scanner.errorCallback = { line, message in
 
             print("Error at line \(line): \(message)")
+
+            hasError = true
         }
 
         scanner.scanTokens()
+
+        if hasError {
+
+            continue
+        }
 
         let parser = Parser(tokens: scanner.tokens)
 
         parser.errorCallback = { line, message in
 
             print("Error at line \(line): \(message)")
+
+            hasError = true
         }
 
         let statements: [StatementProtocol]
@@ -52,6 +76,13 @@ if CommandLine.arguments.count > 1 {
 
             continue
         }
+
+        if hasError {
+
+            continue
+        }
+
+        interpreter.interpret(statements: statements)
     }
 }
 

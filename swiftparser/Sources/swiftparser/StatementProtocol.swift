@@ -9,6 +9,5 @@ import Foundation
 
 protocol StatementProtocol {
 
-    func accept(visitor: StatementVisitorProtocol) -> Any?
+    func accept(visitor: StatementVisitorProtocol) throws -> Any?
 }
-

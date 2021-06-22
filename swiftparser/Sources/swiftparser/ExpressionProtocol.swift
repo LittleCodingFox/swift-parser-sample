@@ -9,6 +9,5 @@ import Foundation
 
 protocol ExpressionProtocol {
 
-    func accept(visitor: ExpressionVisitorProtocol) -> Any?
+    func accept(visitor: ExpressionVisitorProtocol) throws -> Any?
 }
-

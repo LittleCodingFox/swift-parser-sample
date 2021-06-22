@@ -201,7 +201,7 @@ private func GenerateASTFile(baseClass: String,
 
     source += ") {\n\(inner)    }\n\n\(fieldsSource)\n"
 
-    source += "    func accept(visitor: \(visitorBaseClass)) -> Any? {\n        return visitor.visit\(className)(self)\n    }\n}\n"
+    source += "    func accept(visitor: \(visitorBaseClass)) throws -> Any? {\n        return try visitor.visit\(className)(self)\n    }\n}\n"
 
     try source.write(toFile: path, atomically: true, encoding: .utf8)
 }
@@ -213,7 +213,7 @@ private func GenerateASTVisitorProtocol(baseClass: String,
 
     for className in classNames {
 
-        source += "    func visit\(className)(_ item: \(className)) -> Any?\n"
+        source += "    func visit\(className)(_ item: \(className)) throws -> Any?\n"
     }
 
     source += "}\n"

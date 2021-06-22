@@ -150,7 +150,7 @@ private extension Scanner {
             _ = self.next
         }
 
-        let text = self.source[self.source.index(self.source.startIndex, offsetBy: self.start)..<self.source.index(self.source.startIndex, offsetBy: self.current - self.start)]
+        let text = self.source[self.source.index(self.source.startIndex, offsetBy: self.start)..<self.source.index(self.source.startIndex, offsetBy: self.current)]
 
         if let tokenType = Keywords.Keyword(identifier: String(text)) {
 

@@ -11,7 +11,7 @@ extension Parser {
 
     func assignment() throws -> ExpressionProtocol {
 
-        var expression = try self.or()
+        let expression = try self.or()
 
         if self.matches(types: .equal) {
 
